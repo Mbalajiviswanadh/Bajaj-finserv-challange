@@ -26,9 +26,12 @@ function App() {
       const parsedData = JSON.parse(jsonInput);
 
       // Send POST request to backend
-      const response = await axios.post("http://localhost:5000/bfhl", {
-        data: parsedData.data,
-      });
+      const response = await axios.post(
+        "https://bajaj-finserv-challange-backend.vercel.app/bfhl",
+        {
+          data: parsedData.data,
+        }
+      );
 
       const { numbers, alphabets, highest_lowercase_alphabet } = response.data;
 
