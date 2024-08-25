@@ -54,27 +54,43 @@ function App() {
     setSelectedOptions(selected);
   };
 
+  const displayData = (data) => {
+    if (!data || data.length === 0) {
+      return "{}"; // Return empty object for no data
+    }
+    return data.join(", ");
+  };
+
   return (
     <div className="App">
-      <div className="">
-        <h1>BFHL JSON Input</h1>
+      <div className="container">
+        <h1>Bajaj Qualifier-1 Task</h1>
+        <h3>
+          21BCE8520 ||{" "}
+          <a
+            href="https://www.linkedin.com/in/balaji-viswanadh-madhavareddy-875473220/e"
+            target="_blank"
+            rel="noopener noreferrer">
+            Balaji Viswanadh
+          </a>
+        </h3>
+
         <form onSubmit={handleSubmit}>
           <textarea
             value={jsonInput}
             onChange={handleInputChange}
-            placeholder="Enter valid JSON"
-            rows="10"
-            cols="50"></textarea>
+            placeholder='Enter valid JSON, e.g., { "data": ["a", "1", "B", "2"] }'></textarea>
           <br />
           <button type="submit">Submit</button>
         </form>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error">{error}</p>}
         {responseData && (
           <div>
             <h2>Response:</h2>
             <pre>{JSON.stringify(responseData, null, 2)}</pre>
             <h2>Select Options</h2>
             <Select
+              className="Select"
               isMulti
               options={options}
               onChange={handleSelectChange}
@@ -84,7 +100,7 @@ function App() {
               {selectedOptions.map((option) => (
                 <div key={option.value}>
                   <h3>{option.label}</h3>
-                  <p>{option.data.join(", ")}</p>
+                  <p>{displayData(option.data)}</p>
                 </div>
               ))}
             </div>
